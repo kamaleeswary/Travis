@@ -1,13 +1,12 @@
 language: node_js
+node_js:
+ - "8.11"
 
-node_js: 
-  - "8.10"
-
-branches: 
-  only: 
+branches:
+  only:
     - master
 
-addons: 
+addons:
   chrome: stable
 
 before_script:
@@ -19,14 +18,12 @@ cache:
     - node_modules
 
 script:
-  - ng lint
-  - ng test --watch=false
   - ng build --prod
 
-deploy: 
+
+deploy:
   provider: pages
-  skin-cleanup: true
+  skip-cleanup: true
   github-token: $GITHUB_TOKEN
   keep-history: true
   local-dir: ./dist/
-  on:
