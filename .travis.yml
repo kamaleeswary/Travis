@@ -1,29 +1,47 @@
 language: node_js
 node_js:
- - "8.11"
-
-branches:
-  only:
-    - master
-
-addons:
-  chrome: stable
-
-before_script:
-  - yarn global add @angular/cli
+ - "8"
+dist: trusty
+sudo: false
 
 cache:
-  yarn: true
-  directories:
-    - node_modules
+ directories:
+   - node_modules
+
+addons:
+ chrome: stable
 
 script:
-  - ng build --prod
+ - npm run lint
+ - npm run test:headless
+ - npm run build
+ - xvfb-run npm run e2e
+# language: node_js
+# node_js:
+#  - "8.11"
+
+# branches:
+#   only:
+#     - master
+
+# addons:
+#   chrome: stable
+
+# before_script:
+#   - yarn global add @angular/cli
+
+# cache:
+#   yarn: true
+#   directories:
+#     - node_modules
+
+# script:
+#   # - ng build --prod
 
 
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  keep-history: true
-  local-dir: ./dist/
+# deploy:
+#   provider: pages
+#   skip-cleanup: true
+#   github-token: $GITHUB_TOKEN
+#   keep-history: true
+#   local-dir: ./dist/
