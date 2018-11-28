@@ -16,13 +16,15 @@
 # #  - npm run test:headless
 #  - npm run build
 # #  - xvfb-run npm run e2e
+
 language: node_js
 node_js:
- - "8.11"
+ - "8.10"
 
 branches:
   only:
     - master
+
 
 addons:
   chrome: stable
@@ -36,9 +38,8 @@ cache:
     - node_modules
 
 script:
-  - ng lint
-  - ng test --watch=false
   - ng build --prod
+  - ng lint
 
 
 deploy:
@@ -47,3 +48,4 @@ deploy:
   github-token: $GITHUB_TOKEN
   keep-history: true
   local-dir: ./dist/
+on:
